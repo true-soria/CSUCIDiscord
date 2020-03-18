@@ -2,7 +2,7 @@ import discord
 import asyncio
 import datetime
 
-TOKEN = 'Njg5NTQwODM0NjEzNTI2NjEw.XnEq0g.I1t9uY8NgfXZ6VqK0JkS-50SioY'
+TOKEN = 'Token goes here'
 client = discord.Client()
 
 # Room IDs
