@@ -2,7 +2,7 @@ import discord
 import asyncio
 import datetime
 
-TOKEN = 'Njg5NTQwODM0NjEzNTI2NjEw.XnEq0g.I1t9uY8NgfXZ6VqK0JkS-50SioY'
+TOKEN = 'Njg5NTQwODM0NjEzNTI2NjEw.XnKGMQ.rKUnYE1QUnwDqdSu5JP9bpXSckg'
 client = discord.Client()
 
 # Room IDs
@@ -27,6 +27,8 @@ computer_emoji = "\U0001F5A5"
 infinity_emoji = "\U0000267E"
 rocket_emoji = "\U0001F680"
 x_emoji = "\U0000274C"
+sunglasses_face_emoji = "\U0001F60E"
+thumbs_up_emoji = "\U0001F44D"
 
 
 @client.event
@@ -82,6 +84,7 @@ async def on_message(message):
     if message.channel == welcome:
         await welcome_desk(message)
     else:  # For messages from any other chat
+        await request_feature(message)
         await dadum_check(message)
 
 
@@ -96,6 +99,15 @@ async def welcome_desk(message):
     if role is not None:
         await message.author.add_roles(role)
         await message.delete()
+
+
+async def request_feature(message):
+    if message.content.startswith("$request"):
+        request_file = open("requests.txt", "a+")
+        request_file.write(str('\n\n\n' + message.author) + ' requests:\n')
+        request_file.write(message.content)
+        request_file.close()
+        await message.channel.send(sunglasses_face_emoji + ' ' + thumbs_up_emoji)
 
 
 async def background_task():
@@ -119,7 +131,7 @@ async def background_task():
 
 async def dadum_check(message):
     if 'Adam' in message.content:
-        await message.channel.send('*Dadam  ' + "\U0001F60E")
+        await message.channel.send('*Dadam  ' + sunglasses_face_emoji)
 
 
 client.loop.create_task(background_task())
